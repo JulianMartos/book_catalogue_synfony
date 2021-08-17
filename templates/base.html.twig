@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('style/css/bootstrap.css') }}">
+        <link href="{{ asset('style/css/bootstrap.min.css') }}" rel="stylesheet">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
     </head>
     <body>
+        <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="index.php" class="nav-link px-2 link-dark">Books</a></li>
+            <li><a href="authors.php" class="nav-link px-2 link-dark">Authors</a></li>
+            <li><a href="editorials.php" class="nav-link px-2 link-dark">Editorials</a></li>
+            <li><a href="users.php" class="nav-link px-2 link-dark">Users</a></li>
+            <li><a href="reports.php" class="nav-link px-2 link">Download Report</a></li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+            <a href="login.php" type="button" class="btn btn-primary">Login</a>
+                <label for="inputEmail" style="padding: 2%;" class="sr-only">admin</label>
+                <a href="logout.php" type="button" class="btn btn-primary">Logout</a>
+            </div>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
+

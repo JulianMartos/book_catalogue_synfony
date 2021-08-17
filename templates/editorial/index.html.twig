@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editorial index{% endblock %}
+
+{% block body %}
+    <h1>Editorial index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Country</th>
+                <th>PhoneNumber</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for editorial in editorials %}
+            <tr>
+                <td>{{ editorial.id }}</td>
+                <td>{{ editorial.name }}</td>
+                <td>{{ editorial.address }}</td>
+                <td>{{ editorial.country }}</td>
+                <td>{{ editorial.phoneNumber }}</td>
+                <td>
+                    <a href="{{ path('editorial_show', {'id': editorial.id}) }}">show</a>
+                    <a href="{{ path('editorial_edit', {'id': editorial.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('editorial_new') }}">Create new</a>
+{% endblock %}
