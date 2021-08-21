@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Book;
-use Doctrine\DBAL\Types\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class BookType extends AbstractType
 {
@@ -14,7 +15,9 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('publishedDate', DateType::class)
+            ->add('publishedDate', DateType::class, [
+                'widget' => 'single_text',
+            ])
             ->add('author')
             ->add('editorial')
         ;

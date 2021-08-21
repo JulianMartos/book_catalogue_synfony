@@ -1,4 +1,22 @@
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_errors(form) }}
+    <div class="mb-3">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.author) }}
+        {{ form_widget(form.author, {attr: {'placeholder':'--select an option--'}}) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.editorial) }}
+        {{ form_widget(form.editorial) }}
+    </div>
+    <div class="mb-3" style="position: relative;">
+        {{ form_label(form.publishedDate) }}
+        {{ form_widget(form.publishedDate, {attr: {'style':'width: 250px;'}}) }}
+</div>
+
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -8,27 +8,29 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>LastName</th>
-                <th>PhoneNumber</th>
-                <th>Address</th>
-                <th>Country</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">LastName</th>
+                <th scope="col">PhoneNumber</th>
+                <th scope="col">Address</th>
+                <th scope="col">Country</th>
+                <th scope="col">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for author in authors %}
             <tr>
-                <td>{{ author.id }}</td>
-                <td>{{ author.name }}</td>
-                <td>{{ author.lastName }}</td>
-                <td>{{ author.phoneNumber }}</td>
-                <td>{{ author.address }}</td>
-                <td>{{ author.country }}</td>
-                <td>
-                    <a href="{{ path('author_show', {'id': author.id}) }}">show</a>
-                    <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
+                <td scope="row">{{ author.id }}</td>
+                <td scope="row">{{ author.name }}</td>
+                <td scope="row">{{ author.lastName }}</td>
+                <td scope="row">{{ author.phoneNumber }}</td>
+                <td scope="row">{{ author.address }}</td>
+                <td scope="row">{{ author.country|country_name }}</td>
+                <td scope="row">
+                    <a class="btn btn-sm btn-outline-primary" href="{{ path('author_show', {'id': author.id}) }}">Show</a>
+                    {% if is_granted('ROLE_USER') %}
+                    <a class="btn btn-sm btn-outline-primary" href="{{ path('author_edit', {'id': author.id}) }}">Edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -38,6 +40,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('author_new') }}">Create new</a>
+    {% if is_granted('ROLE_USER') %}
+    <a type="button" class="btn btn-primary" href="{{ path('author_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

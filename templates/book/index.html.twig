@@ -3,39 +3,44 @@
 {% block title %}Book index{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
+<div class="container">
+		<h2>Books in Catalogue</h2><br>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>PublishedDate</th>
-                <th>Author</th>
-                <th>Editorial</th>
-                <th>actions</th>
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">PublishedDate</th>
+                <th scope="col">Author</th>
+                <th scope="col">Editorial</th>
+                <th scope="col">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for book in books %}
             <tr>
-                <td>{{ book.id }}</td>
-                <td>{{ book.title }}</td>
-                <td>{{ book.publishedDate ? book.publishedDate|date('Y-m-d') : '' }}</td>
-                <td>{{ book.author }}</td>
-                <td>{{ book.editorial }}</td>
+                <td scope="row">{{ book.id }}</td>
+                <td scope="row">{{ book.title }}</td>
+                <td scope="row">{{ book.publishedDate ? book.publishedDate|date('Y-m-d') : '' }}</td>
+                <td scope="row">{{ book.author }}</td>
+                <td scope="row">{{ book.editorial }}</td>
                 <td>
-                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-outline-primary" href="{{ path('book_show', {'id': book.id}) }}">Show</a>
+                    {% if is_granted('ROLE_USER') %}
+                    <a class="btn btn-sm btn-outline-primary" href="{{ path('book_edit', {'id': book.id}) }}">Edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td scope="row" colspan="4">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('book_new') }}">Create new</a>
+    {% if is_granted('ROLE_USER') %}
+    <a href="{{ path('book_new') }}" type="button" class="btn btn-primary">Create new</a>
+    {% endif %}
+</div>
 {% endblock %}

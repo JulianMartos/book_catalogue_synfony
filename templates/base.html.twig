@@ -13,20 +13,27 @@
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="index.php" class="nav-link px-2 link-dark">Books</a></li>
-            <li><a href="authors.php" class="nav-link px-2 link-dark">Authors</a></li>
-            <li><a href="editorials.php" class="nav-link px-2 link-dark">Editorials</a></li>
-            <li><a href="users.php" class="nav-link px-2 link-dark">Users</a></li>
-            <li><a href="reports.php" class="nav-link px-2 link">Download Report</a></li>
+            <li><a href="{{ path('book_index') }}" class="nav-link px-2 link-dark">Books</a></li>
+            <li><a href="{{ path('author_index') }}" class="nav-link px-2 link-dark">Authors</a></li>
+            <li><a href="{{ path('editorial_index') }}" class="nav-link px-2 link-dark">Editorials</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('user_index') }}" class="nav-link px-2 link-dark">Users</a></li>
+            {% endif %}
+            <li><a href="{{ path('reports') }}" class="nav-link px-2 link">Download Report</a></li>
             </ul>
 
             <div class="col-md-3 text-end">
-            <a href="login.php" type="button" class="btn btn-primary">Login</a>
-                <label for="inputEmail" style="padding: 2%;" class="sr-only">admin</label>
-                <a href="logout.php" type="button" class="btn btn-primary">Logout</a>
+            {% if is_granted('ROLE_USER') %}
+            <label for="inputEmail" style="padding: 2%;" class="sr-only">{{ app.user.username }}</label>
+            <a href="{{ path('app_logout') }}" type="button" class="btn btn-primary">Logout</a>
+            {% else %}
+            <a href="{{ path('app_login') }}" type="button" class="btn btn-primary">Login</a>
+            {% endif %}
             </div>
         </header>
+        <div class="container">
         {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
 
